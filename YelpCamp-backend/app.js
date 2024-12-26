@@ -45,6 +45,8 @@ app.use(mongoSanitize({
     replaceWith: '_'
 }));
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
 // 设置 CORS
 app.use(cors({
     origin: process.env.FRONTEND_URL, // 替换为前端的地址
@@ -62,7 +64,7 @@ const store = new MongoDBStore({
 store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e);
 });
-const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
 const sessionConfig = {
     store,
     name: 'session',
