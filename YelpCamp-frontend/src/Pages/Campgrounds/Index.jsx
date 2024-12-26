@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import mapboxgl from 'mapbox-gl'; // 引入 Mapbox
 import { getCampgrounds } from '../../Services/campgrounds';
+import { Link } from 'react-router-dom';
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN; // 替换为你的 Mapbox Token
 
@@ -104,7 +105,8 @@ function CampgroundsIndex() {
                                 <Button
                                     variant="contained"
                                     color="primary"
-                                    href={`/campgrounds/${campground._id}`}
+                                    component={Link} // 使用 Link 组件
+                                    to={`/campgrounds/${campground._id}`} // React Router 的 to 属性
                                 >
                                     View Details
                                 </Button>
