@@ -35,6 +35,8 @@ module.exports.showCampground = async (req, res) => {
         return res.status(404).json({ error: 'Cannot find that campground!' });
     }
     res.json(campground); // 返回露营地详情的 JSON 数据
+    console.log('Campground Data:', campground); // 打印调试
+    console.log('Current User:', req.user); // 打印用户数据
 };
 
 module.exports.updateCampground = async (req, res) => {

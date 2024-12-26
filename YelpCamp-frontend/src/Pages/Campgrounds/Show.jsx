@@ -38,6 +38,10 @@ function CampgroundShow() {
     };
 
     const navigate = useNavigate();
+    useEffect(() => {
+        console.log('Current User:', currentUser);
+        console.log('Campground:', campground);
+    }, [currentUser, campground]);
 
     // 获取营地数据
     useEffect(() => {
