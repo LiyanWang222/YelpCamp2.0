@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:3001', // 设置你的后端 API 基础 URL
+    baseURL: import.meta.env.VITE_BASE_URL, // 从环境变量读取 后端 API 基础 URL
     timeout: 100000, // 请求超时设置
     withCredentials: true, // 允许发送和接收 cookie，用于会话管理
 });
