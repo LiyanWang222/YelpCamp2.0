@@ -182,7 +182,7 @@ function CampgroundShow() {
                                 Submitted by: {campground?.author?.username || 'Unknown'}
                             </Typography>
                         </CardContent>
-                        {currentUser && currentUser._id === campground?.author?._id && (
+                        {currentUser && currentUser.id === campground?.author?._id && (
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: 2 }}>
                                 <Button
                                     variant="contained"
@@ -234,7 +234,7 @@ function CampgroundShow() {
                                     <Typography variant="h6">{review?.author?.username || 'Anonymous'}</Typography>
                                     <Rating value={review.rating} readOnly />
                                     <Typography>{review.body}</Typography>
-                                    {currentUser && currentUser._id === review?.author?._id && (
+                                    {currentUser && currentUser.id === review?.author?._id && (
                                         <Button
                                             variant="outlined"
                                             color="error"

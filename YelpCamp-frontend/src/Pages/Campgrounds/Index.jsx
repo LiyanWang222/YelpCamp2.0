@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import mapboxgl from 'mapbox-gl'; // 引入 Mapbox
 import { getCampgrounds } from '../../Services/campgrounds';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN; // 替换为你的 Mapbox Token
 
@@ -10,6 +10,7 @@ function CampgroundsIndex() {
     const [campgrounds, setCampgrounds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     // 加载 Campgrounds 数据
     useEffect(() => {
@@ -44,15 +45,25 @@ function CampgroundsIndex() {
                         .setHTML(`
                             <h3>${campground.title}</h3>
                             <p>${campground.location}</p>
-                            <a href="/campgrounds/${campground._id}" style="color: blue; text-decoration: underline;">
+                            <button id="popup-button-${campground._id}" style="color: blue; text-decoration: underline; background: none; border: none; cursor: pointer;">
                                 View Details
-                            </a>
+                            </button>
                         `);
 
                     new mapboxgl.Marker({ color: 'blue' })
                         .setLngLat(campground.geometry.coordinates) // 设置点的位置
                         .setPopup(popup) // 绑定弹窗
                         .addTo(map);
+
+                    // 添加事件监听器到按钮
+                    setTimeout(() => {
+                        const button = document.getElementById(`popup-button-${campground._id}`);
+                        if (button) {
+                            button.addEventListener('click', () => {
+                                navigate(`/campgrounds/${campground._id}`);
+                            });
+                        }
+                    }, 0); // 确保弹窗完全渲染后再添加事件监听器
                 } else {
                     console.error('Invalid geometry for campground:', campground);
                 }
@@ -61,7 +72,7 @@ function CampgroundsIndex() {
             // 添加地图缩放和旋转控件
             map.addControl(new mapboxgl.NavigationControl());
         }
-    }, [campgrounds]);
+    }, [campgrounds, navigate]);
 
     if (loading) {
         return <Typography>Loading...</Typography>;
