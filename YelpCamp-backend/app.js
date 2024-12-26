@@ -71,9 +71,10 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        // secure: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7
+        secure: process.env.NODE_ENV === 'production', // 在生产环境中启用 secure
+        sameSite: 'none', // 必须设置为 none 以支持跨域 Cookie
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 周
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7
     }
 };
 
@@ -104,7 +105,7 @@ const connectSrcUrls = [
     "https://events.mapbox.com/",
 ];
 const fontSrcUrls = [];
-const cloudinaryURL = process.env.CLOUDINARY_URL
+
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
