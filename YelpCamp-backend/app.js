@@ -51,7 +51,7 @@ app.use(cors({
     credentials: true
 }));
 
-const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
 
 const store = new MongoDBStore({
     url: dbUrl,
@@ -62,7 +62,7 @@ const store = new MongoDBStore({
 store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e);
 });
-
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 const sessionConfig = {
     store,
     name: 'session',
@@ -73,8 +73,7 @@ const sessionConfig = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production', // 在生产环境中启用 secure
         sameSite: 'none', // 必须设置为 none 以支持跨域 Cookie
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 周
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 周
     }
 };
 

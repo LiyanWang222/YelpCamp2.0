@@ -4,6 +4,7 @@ const Campground = require('./models/campground');
 const Review = require('./models/review');
 
 module.exports.isLoggedIn = (req, res, next) => {
+    console.log('Authenticated User:', req.user);
     if (!req.isAuthenticated()) {
         return res.status(401).json({ error: 'You must be signed in first!' });
     }
