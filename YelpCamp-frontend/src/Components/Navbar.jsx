@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../Context/UserContext';
 
 function Navbar() {
     const { user, logout } = useContext(UserContext);
