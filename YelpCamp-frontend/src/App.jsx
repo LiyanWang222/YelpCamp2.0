@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { UserProvider } from './Context/UserContext'; // 引入 UserContext.Provider
+import { UserProvider }  from './Context/UserContext'; // 引入 UserContext.Provider
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Home from './Pages/home';
