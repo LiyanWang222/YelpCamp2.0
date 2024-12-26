@@ -47,7 +47,7 @@ app.use(mongoSanitize({
 
 // 设置 CORS
 app.use(cors({
-    origin: 'http://localhost:5173', // 替换为前端的地址
+    origin: process.env.FRONTEND_URL, // 替换为前端的地址
     credentials: true
 }));
 
