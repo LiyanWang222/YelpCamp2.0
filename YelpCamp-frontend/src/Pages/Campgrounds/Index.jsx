@@ -45,7 +45,10 @@ function CampgroundsIndex() {
                         .setHTML(`
                             <h3>${campground.title}</h3>
                             <p>${campground.location}</p>
-                            <button id="popup-button-${campground._id}" style="color: blue; text-decoration: underline; background: none; border: none; cursor: pointer;">
+                            <button 
+                                data-id="${campground._id}" 
+                                class="popup-button" 
+                                style="color: blue; text-decoration: underline; background: none; border: none; cursor: pointer;">
                                 View Details
                             </button>
                         `);
@@ -54,18 +57,19 @@ function CampgroundsIndex() {
                         .setLngLat(campground.geometry.coordinates) // 设置点的位置
                         .setPopup(popup) // 绑定弹窗
                         .addTo(map);
-
-                    // 添加事件监听器到按钮
-                    setTimeout(() => {
-                        const button = document.getElementById(`popup-button-${campground._id}`);
-                        if (button) {
-                            button.addEventListener('click', () => {
-                                navigate(`/campgrounds/${campground._id}`);
-                            });
-                        }
-                    }, 0); // 确保弹窗完全渲染后再添加事件监听器
                 } else {
                     console.error('Invalid geometry for campground:', campground);
+                }
+            });
+
+            // 添加事件委托，捕获按钮点击事件
+            map.on('click', (event) => {
+                const button = event.originalEvent.target.closest('.popup-button');
+                if (button) {
+                    const campgroundId = button.getAttribute('data-id');
+                    if (campgroundId) {
+                        navigate(`/campgrounds/${campgroundId}`);
+                    }
                 }
             });
 
