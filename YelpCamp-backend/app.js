@@ -104,6 +104,7 @@ const connectSrcUrls = [
     "https://events.mapbox.com/",
 ];
 const fontSrcUrls = [];
+const cloudinaryURL = process.env.CLOUDINARY_URL
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
@@ -117,7 +118,7 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                "https://res.cloudinary.com/dpwwl65p2/", // 替换为你的 Cloudinary 账号
+                `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`, // 从环境变量中动态读取
                 "https://images.unsplash.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
