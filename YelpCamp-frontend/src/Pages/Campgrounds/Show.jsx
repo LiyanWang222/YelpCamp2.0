@@ -39,8 +39,21 @@ function CampgroundShow() {
 
     const navigate = useNavigate();
     useEffect(() => {
-        console.log('Current User Id:', currentUser._id);
-        console.log('Campground Author Id:', campground.author._id);
+        if (currentUser && campground?.author) {
+            console.log('Current User:', currentUser); // 打印当前用户数据
+            console.log('Campground Author:', campground.author); // 打印营地作者数据
+            console.log(
+                'Condition:',
+                currentUser._id === campground.author._id.toString() // 比较结果
+            );
+            console.log(
+                'Data Types:',
+                typeof currentUser._id, // currentUser._id 的类型
+                typeof campground.author._id // campground.author._id 的类型
+            );
+        } else {
+            console.log('Data not fully loaded yet.');
+        }
     }, [currentUser, campground]);
 
     // 获取营地数据
