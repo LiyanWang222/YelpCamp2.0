@@ -39,8 +39,8 @@ function CampgroundShow() {
 
     const navigate = useNavigate();
     useEffect(() => {
-        console.log('Current User Id:', currentUser.id);
-        console.log('Campground Author Id:', campground.author.id);
+        console.log('Current User Id:', currentUser._id);
+        console.log('Campground Author Id:', campground.author._id);
     }, [currentUser, campground]);
 
     // 获取营地数据
