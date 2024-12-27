@@ -24,6 +24,9 @@ router.post('/login', (req, res, next) => {
                 console.error('Login error:', err); // 打印登录错误日志
                 return next(err); // 将错误交给全局错误处理
             }
+            // 调试：打印 Cookie 和 Session 信息
+            console.log('Session:', req.session);
+            console.log('User Logged In:', user);
             // 登录成功，返回用户信息
             return res.status(200).json({ message: 'Login successful', user: { id: user._id, username: user.username } });
         });
@@ -34,7 +37,9 @@ router.post('/logout', users.logout); // 用户登出
 
 // 获取当前已登录的用户信息
 router.get('/me', isLoggedIn, (req, res) => {
-    res.json(req.user); // 返回当前登录的用户数据
+    res.status(200).json({
+        user: req.user, // 当前用户数据
+        message: 'User information retrieved successfully'
+    });
 });
-
 module.exports = router;

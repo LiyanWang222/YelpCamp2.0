@@ -9,7 +9,8 @@ export const login = async (formData) => {
                 'Content-Type': 'application/json',
             }
         });
-        console.log('Auth login response:', response.data);
+        console.log('Response Headers:', response.headers);
+        console.log('Response Data:', response.data);
         return response.data; // 返回用户数据
     } catch (error) {
         throw new Error(error.response?.data?.error || 'Login failed');

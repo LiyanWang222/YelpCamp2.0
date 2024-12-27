@@ -73,8 +73,8 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // 在生产环境中启用 secure
-        sameSite: 'none', // 必须设置为 none 以支持跨域 Cookie
+        secure: process.env.NODE_ENV === 'production', 
+        sameSite: 'none', 
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 周
     }
 };
@@ -161,4 +161,10 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log(`Serving on port ${port}`);
+});
+
+app.use((req, res, next) => {
+    console.log('Cookies:', req.cookies); // 打印接收到的 cookie
+    console.log('Session:', req.session); // 打印 session 数据
+    next();
 });

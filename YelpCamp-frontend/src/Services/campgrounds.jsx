@@ -13,6 +13,9 @@ export const getCampgrounds = async () => {
 export const getCampground = async (id) => {
     try {
         const response = await api.get(`/campgrounds/${id}`);
+        console.log('Response:', response); // 打印整个响应
+        console.log('Response Headers:', response.headers); // 打印响应头
+        console.log('Request Headers:', response.config.headers); // 打印请求头
         return response.data;
     } catch (error) {
         console.error(`Fetching campground ${id} failed:`, error);

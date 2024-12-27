@@ -38,9 +38,10 @@ function CampgroundShow() {
     };
 
     const navigate = useNavigate();
+
     useEffect(() => {
         if (currentUser && campground?.author) {
-            const userId = currentUser.user?.id; // 获取 user 对象中的 id
+            const userId = currentUser?.id || currentUser?.user?.id || currentUser?._id; // 改进后的获取逻辑
             console.log('Current User ID:', userId);
             console.log('Campground Author ID:', campground.author._id);
             console.log('Condition:', userId === campground.author._id.toString());
@@ -133,9 +134,10 @@ function CampgroundShow() {
 
     if (loading) return <CircularProgress />; // 加载指示器
     if (error) return <Alert severity="error">{error}</Alert>;
+    const userId = currentUser?.id || currentUser?.user?.id || currentUser?._id;
 
     return (
-        <Container >
+        <Container>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
@@ -182,7 +184,7 @@ function CampgroundShow() {
                                 Submitted by: {campground?.author?.username || 'Unknown'}
                             </Typography>
                         </CardContent>
-                        {currentUser && currentUser.user.id === campground?.author?._id && (
+                        {currentUser && userId === campground?.author?._id && (
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: 2 }}>
                                 <Button
                                     variant="contained"
@@ -234,7 +236,7 @@ function CampgroundShow() {
                                     <Typography variant="h6">{review?.author?.username || 'Anonymous'}</Typography>
                                     <Rating value={review.rating} readOnly />
                                     <Typography>{review.body}</Typography>
-                                    {currentUser && currentUser.user.id === review?.author?._id && (
+                                    {currentUser && userId === review?.author?._id && (
                                         <Button
                                             variant="outlined"
                                             color="error"
