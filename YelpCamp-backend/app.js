@@ -72,7 +72,6 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        domain: process.env.FRONTEND_URL,
         httpOnly: true,
         secure: true, 
         sameSite: 'none', 
