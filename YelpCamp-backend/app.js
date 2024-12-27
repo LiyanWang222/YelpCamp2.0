@@ -73,7 +73,7 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', 
+        secure: true, 
         sameSite: 'none', 
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 周
     }
@@ -164,7 +164,7 @@ app.listen(port, () => {
 });
 
 app.use((req, res, next) => {
-    console.log('Cookies:', req.cookies); // 打印接收到的 cookie
-    console.log('Session:', req.session); // 打印 session 数据
+    console.log('Cookies:', req.cookies);
+    console.log('Session:', req.session);
     next();
 });
