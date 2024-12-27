@@ -74,7 +74,7 @@ const sessionConfig = {
     cookie: {
         httpOnly: true,
         secure: true, 
-        sameSite: 'None', 
+        sameSite: 'none', 
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 周
     }
 };
