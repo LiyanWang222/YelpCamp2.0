@@ -72,9 +72,10 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
+        domain: process.env.NODE_ENV === 'production' ? 'yelpcamp-88pg.onrender.com' : undefined, // 在生产环境中设置 domain
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // 允许跨域 cookie
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 周
     }
 };
