@@ -36,6 +36,7 @@ db.once("open", () => {
 });
 
 const app = express();
+app.enable('trust proxy');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // 添加解析 JSON 数据的中间件
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize({
     replaceWith: '_'
 }));
+
 
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
@@ -131,8 +133,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
 
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
